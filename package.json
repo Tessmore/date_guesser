@@ -2,9 +2,10 @@
   "name": "date_guesser",
   "version": "0.0.1",
   "description": "Guess the day, month and year of a given date.",
-  "main": "lib/date.js",
+  "main": "date_guesser.js",
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "mocha -R spec",
+    "build": "uglifyjs date_guesser.js -c \"evaluate=false\" -o date_guesser-min.js"
   },
   "homepage": "http://github.com/Tessmore/date_guesser",
   "repository": {
@@ -20,6 +21,6 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "mocha": "1.7.x"
+    "mocha": "2.1.x"
   }
 }

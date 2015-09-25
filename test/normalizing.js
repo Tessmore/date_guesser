@@ -10,11 +10,13 @@ describe('Normalization', function () {
             assert.equal(guess.norm("10-20-2005"), "10 20 2005");
             assert.equal(guess.norm("10/20/2005"), "10 20 2005");
             assert.equal(guess.norm("10|20|2005"), "10 20 2005");
+            assert.equal(guess.norm("10.20.2005"), "10 20 2005");
             assert.equal(guess.norm("10--20--2005"), "10 20 2005");
             assert.equal(guess.norm("10 - 20 - 2005"), "10 20 2005");
             assert.equal(guess.norm("10 20-2005"), "10 20 2005");
             assert.equal(guess.norm("10-jan-2005"), "10 jan 2005");
             assert.equal(guess.norm("10-jan.-2005"), "10 jan 2005");
+            assert.equal(guess.norm("10.october.2005"), "10 october 2005");
         });
 
         it("Should strip brackets", function () {

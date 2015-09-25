@@ -10,10 +10,14 @@ Use [npm](http://npmjs.org):
 ```javascript
 var guess = require('date_guesser');
 
-console.log(guess("20-01-1998"))      // 20  jan.  1998
-console.log(guess("1 sept. 2004"))    // 1   sep.  2004
-console.log(guess("June, 25th 2005")) // 25  june  2005
+console.log(guess.parse("20-01-1998"))
+// Tue Jan 20 1998 00:36:37 GMT+0200 (W. Europe Standard Time)
 
+console.log(guess.parse("1 sept. 2004"))
+// Wed Sep 01 2004 00:36:37 GMT+0200 (W. Europe Daylight Time)
+
+console.log(guess.parse("June, 25th 2005"))
+// Sat Jun 25 2005 00:36:37 GMT+0200 (W. Europe Daylight Time)
 ```
 
 ## Options

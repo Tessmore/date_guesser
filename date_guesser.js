@@ -5,10 +5,6 @@
         return /[1-9][0-9]{3,}/.test(s);
     }
 
-    function isMonth(s) {
-
-    }
-
     function isNotNumeric(s) {
         return /[^0-9]/.test(s);
     }

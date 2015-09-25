@@ -1,0 +1,25 @@
+{
+  "name": "date_guesser",
+  "version": "0.0.1",
+  "description": "Guess the day, month and year of a given date.",
+  "main": "lib/date.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "homepage": "http://github.com/Tessmore/date_guesser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tessmore/date_guesser.git"
+  },
+  "keywords": [
+    "date", "parsing"
+  ],
+  "author": {
+    "name": "Fabiën Tesselaar"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "mocha": "1.7.x"
+  }
+}

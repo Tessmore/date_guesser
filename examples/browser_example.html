@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Date Guesser</title>
+  <meta name="description" content="Guess date by finding year, month and day in a string">
+  <meta name="author" content="Tessmore">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="../date-guesser-min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="inner">
+    <h1>Date Guesser</h1>
+
+    <input
+        class="date-input"
+        type="text"
+        autocomplete="off" autofocus onkeyup="guess(this.value)">
+
+    <input id="output">
+
+    <div class="description">
+      <p>Guesses the date for a given string. For example:</p>
+      <ul>
+        <li>'10/4/14
+        <li>9-01-2001
+        <li>Aug 9, 1995
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+var output = document.getElementById("output");
+var guess = function(val) {
+    var parsed = date_guesser.parse(val).toString();
+
+    if (parsed !== "Invalid Date") {
+        output.value = parsed;
+    }
+}
+</script>
+
+<!-- general styling -->
+<style>
+  body {
+      font:1em Helvetica, sans-serif;
+      line-height: 146%;
+  }
+
+  .container {
+      margin:0 auto;
+      width:90%;
+      min-width:320px;
+      max-width:640px;
+  }
+
+  .inner {
+      float:left;
+      width:100%;
+      position:relative;
+
+      height:94vh;
+      min-height:600px;
+  }
+
+  h1 {
+      font-size: 2.4em;
+      color:#A0CC21;
+
+      padding:30px 1px;
+      border-bottom:4px solid #CBEA71;
+  }
+
+
+  input {
+      padding:10px 7px;
+      border:1px solid #ddd;
+      font-size:1.5em;
+      color:#333;
+
+      width:99%;
+      float:left;
+  }
+
+  .date-input {
+      margin-bottom: 20px;
+  }
+
+  #output {
+      padding:20px 7px;
+      background: #eee;
+  }
+
+  .description {
+      position:absolute;
+      float:left;
+      width:100%;
+
+      bottom:4px;
+
+      border-top:3px solid #eee;
+      padding-top:8px;
+
+      color:#999;
+      font-size:20px;
+      line-height: 28px;
+  }
+
+  .description p {
+      margin:0;
+  }
+</style>
+</body>
+</html>

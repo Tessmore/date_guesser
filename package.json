@@ -5,7 +5,7 @@
   "main": "date_guesser.js",
   "scripts": {
     "test": "set NODE_ENV=testing & mocha -R spec",
-    "build": "uglifyjs date_guesser.js -c \"evaluate=false\" -o date_guesser-min.js"
+    "build": "uglifyjs date-guesser.js -c \"evaluate=false\" -o date-guesser-min.js"
   },
   "homepage": "http://github.com/Tessmore/date_guesser",
   "repository": {

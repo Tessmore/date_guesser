@@ -24,6 +24,16 @@ describe('Parsing dates', function () {
         });
     });
 
+    describe('Shortened year', function () {
+        var res = guess.parse("5 10 '05");
+
+        it("should get Date(5 oct. 2005)", function () {
+            assert.equal(res.getDate(), 5);
+            assert.equal(res.getMonth(), 9);
+            assert.equal(res.getFullYear(), 2005);
+        });
+    });
+
     describe('Non-ambigious day and month', function () {
         var res = guess.parse("22 5 2005");
 

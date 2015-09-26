@@ -38,6 +38,14 @@ describe('Normalization', function () {
         });
     });
 
+    describe('Number indicators (13th, 3rd)', function () {
+        it("Should be stripped", function () {
+            assert.equal(guess.norm("July 23rd, 2010"), "july 23 2010");
+            assert.equal(guess.norm("12th june 2010"), "12 june 2010");
+            assert.equal(guess.norm("April 15e, 2012"), "april 15 2012");
+        });
+    });
+
     describe('Casing', function () {
         it("Should be lower", function () {
             assert.equal(guess.norm("2 Jan 2010"), "2 jan 2010");

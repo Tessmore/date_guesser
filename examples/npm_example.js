@@ -1,4 +1,4 @@
-var guess = require('../date_guesser');
+var guess = require('../date-guesser');
 
 console.log(guess.parse("20-01-1998"))
 console.log(guess.parse("1 sept. 2004"))

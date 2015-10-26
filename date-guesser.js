@@ -3,7 +3,12 @@
 ;(function() {
     var guesser = {
         parse : function(date, cMonth, cDay) {
-            // Set fallback date to first day of the year
+            date = date.toString();
+
+            if (date.length === 0 || date.length > 20) {
+                return new Date(date);
+            }
+
             var current = new Date();
                 current.setHours(12);
                 current.setMinutes(0);
@@ -32,8 +37,32 @@
                 }
             }
 
-            var day = 1, month = -1;
-            if (allNumeric(parts)) {
+            // Find month by written name
+            var foundMonth = false;
+            for (var i=0; i<parts.length; i++) {
+                if (isNotNumeric(parts[i])) {
+                    month = lookupMonth(parts[i]);
+
+                    if (month >= 0) {
+                        foundMonth = true;
+                        current.setMonth(+month - 1);
+                        parts.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+
+            // Filter all that cannot be day/month nr.
+            parts = parts.filter(function(p) {
+                return isInt(p) && +p <= 31;
+            });
+
+            // If the month is found, just pick the first number as the day
+            if (foundMonth) {
+                current.setDate(+parts[0]);
+            }
+            else if (parts.length >= 2) {
+                var day = 1, month = -1;
                 // TODO: Guess standards based on country (i.e dmy, ymd versus m, dy)
                 if (isAmbiguousDate(parts[0], parts[1]) || +parts[0] > 12) {
                     day = parts[0]; month = parts[1];
@@ -41,25 +70,13 @@
                 else {
                     day = parts[1]; month = parts[0];
                 }
-            }
-            // Assume one of the two contains day as a number.
-            else {
-                if (isNotNumeric(parts[0])) {
-                    day = parts[1]||1; month = parts[0];
+
+                current.setDate(day);
+
+                if (month > 0) {
+                    // Zero based
+                    current.setMonth(+month - 1);
                 }
-                else {
-                    day = parts[0]||1; month = parts[1];
-                }
-
-                month = lookupMonth(month);
-            }
-
-
-            current.setDate(day);
-
-            if (month > 0) {
-                // Zero based
-                current.setMonth(+month - 1);
             }
 
             return current;
@@ -71,7 +88,7 @@
     function normalize(date) {
         return (" " + date.toLowerCase())      // Easier boundary check
           .replace(/[^\w\s']/g, ' ')           // 10-02-2010 -> 10 02 2010
-          .replace(/([a-z]{1,})/g, " $1 ")  // 10okt2010  -> 10 okt 2010
+          .replace(/([a-z]{1,})/g, " $1 ")     // 10okt2010  -> 10 okt 2010
           .replace(/ 0([1-9]{1,})/g, " $1")    // 10 02 2010 -> 10 2 2010
           .replace(/\b(e|th|rd)\b/g, "")
           .replace(/\s{2,}/g, ' ')             // multi whitespace to single
@@ -84,6 +101,10 @@
 
     function isShortYear(s) {
         return /'[0-9]{2,}/.test(s);
+    }
+
+    function isInt(s) {
+        return /[0-9]+/.test(s);
     }
 
     function isNotNumeric(s) {
@@ -106,27 +127,16 @@
     function lookupMonth(m) {
         var mapping = {
             "j": 1, "jan": 1, "yan": 1,
-
             "f": 2, "feb": 2, "fev": 2, "fév": 2,
-
             "mar": 3, "mrt": 3, "mär": 3,
-
             "apr": 4, "avr": 4,
-
             "may": 5, "mei": 5, "mai": 5,
-
             "jun": 6, "juin": 6, "iyn": 6,
-
             "jul": 7, "juil": 7, "iyl": 7,
-
             "aug":8, "aou": 8, "aoû": 8, "avq": 8,
-
             "sep":9, "sen": 9,
-
             "oct":10, "okt": 10,
-
             "nov":11, "noy": 11,
-
             "dec":12, "déc": 12, "dez": 12, "des": 12, "dek": 12
         };
 

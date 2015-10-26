@@ -1,7 +1,7 @@
 "use strict";
 
 var assert = require('assert');
-var guess  = require('../date_guesser');
+var guess  = require('../date-guesser');
 
 describe('Normalization', function () {
     describe('Containing symbols', function () {
@@ -52,5 +52,4 @@ describe('Normalization', function () {
             assert.equal(guess.norm("2JAN2010"), "2 jan 2010");
         });
     });
-
 });

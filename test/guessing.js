@@ -1,7 +1,7 @@
 "use strict";
 
 var assert = require('assert');
-var guess  = require('../date_guesser');
+var guess  = require('../date-guesser');
 
 describe('Parsing dates', function () {
     describe('Simple dash seperated', function () {

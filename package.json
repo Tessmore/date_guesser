@@ -1,6 +1,6 @@
 {
   "name": "date_guesser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Guess the day, month and year of a given date.",
   "main": "date_guesser.js",
   "scripts": {

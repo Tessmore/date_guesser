@@ -4,7 +4,12 @@ var assert = require('assert');
 var guess  = require('../date-guesser');
 
 describe('Normalization', function () {
+
     describe('Containing symbols', function () {
+        it("Should skip empty date", function () {
+            assert.equal(guess.norm(), false);
+        });
+
         it("Should strip seperators", function () {
             assert.equal(guess.norm("10 20 2005"), "10 20 2005");
             assert.equal(guess.norm("10-20-2005"), "10 20 2005");

@@ -1,14 +1,10 @@
-"use strict";
 
+(function() {
+    "use strict";
 
-;(function() {
+    var mod = angular.module("date-guesser", []);
+
     function normalize(date) {
-        // Empty/undefined date is invalid
-        if (typeof date === "undefined" || !date.length > 1) {
-            return false;
-        }
-
-
         return (" " + date.toLowerCase())      // Easier boundary check
           .replace(/[^\w\s']/g, " ")           // 10-02-2010 -> 10 02 2010
           .replace(/([a-z]{1,})/g, " $1 ")     // 10okt2010  -> 10 okt 2010
@@ -32,6 +28,16 @@
 
     function isNotNumeric(s) {
         return /[^0-9]/.test(s);
+    }
+
+    function allNumeric(list) {
+        for (var i=0; i < list.length; i++) {
+            if (isNotNumeric(list[i])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     function isAmbiguousDate(a, b) {
@@ -122,14 +128,14 @@
     // - cDay (str 'start' or 'end') : if no day is found, should it be 1 or end of month
 
     function parse(date, cMonth, cDay) {
+        var year = null, month = null, day = null;
 
-        // Empty/undefined date is invalid
-        if (typeof date === "undefined" || !date.length > 1) {
+        date = date.toString();
+
+        // Assume empty & very long dates are invalid
+        if (date.length === 0 || date.length > 20) {
             return false;
         }
-
-        var year = null, month = null, day = null;
-        date = date.toString();
 
         var parts = normalize(date).split(" ");
 
@@ -217,23 +223,13 @@
             return current;
         }
 
-
         return false;
     }
 
-
-    var guesser = {
-        "parse": parse,
-        "norm" : normalize
-    }
-
-    if (typeof exports !== 'undefined') {
-        if (typeof module !== 'undefined' && module.exports) {
-            exports = module.exports = guesser;
-        }
-        exports.date_guesser = guesser;
-    }
-    else {
-        this.date_guesser = guesser;
-    }
-}).call(this);
+     mod.factory("dateGuesser", function() {
+        return {
+            "parse": parse,
+            "normalize": normalize
+        };
+    });
+});

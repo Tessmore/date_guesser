@@ -2,7 +2,7 @@
   "name": "date_guesser",
   "version": "0.0.3",
   "description": "Guess the day, month and year of a given date.",
-  "main": "date_guesser.js",
+  "main": "date-guesser.js",
   "scripts": {
     "test": "set NODE_ENV=testing & mocha -R spec",
     "build": "uglifyjs date-guesser.js -c \"evaluate=false\" -o date-guesser-min.js"
